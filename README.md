@@ -21,5 +21,7 @@ Tibco EMS and Docker integration
 
 4) On your another docker-machine you can run
 
-      docker run -it -p 7222:7222 mami/tibco
+      docker run -it -p 8222:7222 mami/tibco
+      
+  After that you can connect with client by tcp://192.168.99.100:8222 (where IP is your's docker machine)
 

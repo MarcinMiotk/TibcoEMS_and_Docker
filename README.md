@@ -25,3 +25,10 @@ Tibco EMS and Docker integration
       
   After that you can connect with client by tcp://192.168.99.100:8222 (where IP is your's docker machine)
 
+
+
+The logs in the Tibco container are located at:
+
+        /home/user/tibco/tibco/cfgmgmt/ems/data/datastore/
+
+

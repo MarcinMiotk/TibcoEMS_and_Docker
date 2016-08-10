@@ -19,7 +19,7 @@ public class DockerContainerRule extends ExternalResource {
     final CreateContainerResponse container;
     final String waitForHost;
     final int waitForPort;
-    final long WAIT_TIMEOUT = 10_000L;
+    final static long WAIT_TIMEOUT = 10_000L;
 
     public DockerContainerRule(String imageName, String[] ports, String waitForHost, int waitForPort) {
         try {
@@ -35,7 +35,6 @@ public class DockerContainerRule extends ExternalResource {
                 portBindings.bind(ExposedPort.tcp(Integer.parseInt(fromTo[0])), Ports.Binding.bindPort(Integer.parseInt(fromTo[1])));
             }
             container = client.createContainerCmd(imageName).withPortBindings(portBindings).exec();
-            System.out.println("RULE CONSTRUCTOR");
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
@@ -44,8 +43,6 @@ public class DockerContainerRule extends ExternalResource {
     @Override
     protected void before() throws Throwable {
         super.before();
-        System.out.println("BEFORE");
-
         client.startContainerCmd(container.getId()).exec();
         waitForPort(waitForHost, waitForPort, WAIT_TIMEOUT);
     }
@@ -53,7 +50,6 @@ public class DockerContainerRule extends ExternalResource {
     @Override
     protected void after() {
         super.after();
-        System.out.println("AFTER");
         try {
             client.killContainerCmd(container.getId()).exec();
             client.removeContainerCmd(container.getId()).withForce(true).exec();

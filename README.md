@@ -32,3 +32,11 @@ The logs in the Tibco container are located at:
         /home/user/tibco/tibco/cfgmgmt/ems/data/datastore/
 
 
+
+		
+		
+		
+*) To manage remotely the Docker Machine in Linux, you have to run
+		sudo dockerd -D --tls=false -H tcp://yourip:2376
+		
+	
